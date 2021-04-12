@@ -1,4 +1,4 @@
-package com.kasperknop.googleservicesexample;
+package com.kasperknop.googleservicesexample.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,29 +6,31 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.kasperknop.googleservicesexample.R;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class SignInActivity extends AppCompatActivity {
-
     private static final int RC_SIGN_IN = 42;
+    private SignInViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(SignInViewModel.class);
         checkIfSignedIn();
         setContentView(R.layout.signin_activity);
     }
 
     private void checkIfSignedIn() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null)
-            goToMainActivity();
+        viewModel.getCurrentUser().observe(this, user -> {
+            if (user != null)
+                goToMainActivity();
+        });
     }
 
     private void goToMainActivity() {

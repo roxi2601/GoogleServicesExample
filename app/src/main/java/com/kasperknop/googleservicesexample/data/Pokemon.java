@@ -1,7 +1,6 @@
-package com.kasperknop.googleservicesexample;
+package com.kasperknop.googleservicesexample.data;
 
 public class Pokemon {
-
     private String name;
     private int number;
 
