@@ -9,10 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class PokemonLiveData extends LiveData<Pokemon> {
-    DatabaseReference databaseReference;
-
-    private final ValueEventListener listener = new ValueEventListener(){
-
+    private final ValueEventListener listener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             Pokemon pokemon = snapshot.getValue(Pokemon.class);
@@ -21,11 +18,11 @@ public class PokemonLiveData extends LiveData<Pokemon> {
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-
         }
     };
+    DatabaseReference databaseReference;
 
-    public PokemonLiveData(DatabaseReference ref){
+    public PokemonLiveData(DatabaseReference ref) {
         databaseReference = ref;
     }
 
