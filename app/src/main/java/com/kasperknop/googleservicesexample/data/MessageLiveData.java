@@ -8,12 +8,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class PokemonLiveData extends LiveData<Pokemon> {
+public class MessageLiveData extends LiveData<Message> {
     private final ValueEventListener listener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            Pokemon pokemon = snapshot.getValue(Pokemon.class);
-            setValue(pokemon);
+            Message message = snapshot.getValue(Message.class);
+            setValue(message);
         }
 
         @Override
@@ -22,7 +22,7 @@ public class PokemonLiveData extends LiveData<Pokemon> {
     };
     DatabaseReference databaseReference;
 
-    public PokemonLiveData(DatabaseReference ref) {
+    public MessageLiveData(DatabaseReference ref) {
         databaseReference = ref;
     }
 

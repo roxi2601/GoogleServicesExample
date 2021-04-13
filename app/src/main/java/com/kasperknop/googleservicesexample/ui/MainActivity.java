@@ -12,24 +12,25 @@ import androidx.lifecycle.ViewModelProvider;
 import com.kasperknop.googleservicesexample.R;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText editText;
-    private TextView textView;
-    private MainActivityViewModel viewModel;
+    private EditText messageEditText;
+    private TextView messageTextView;
     private TextView welcomeMessage;
+    private MainActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        viewModel.init();
         checkIfSignedIn();
         setContentView(R.layout.activity_main);
-        editText = findViewById(R.id.editText);
-        textView = findViewById(R.id.textView);
-        welcomeMessage = findViewById(R.id.welcomeMessage);
+        messageEditText = findViewById(R.id.message_editText);
+        messageTextView = findViewById(R.id.message_textView);
+        welcomeMessage = findViewById(R.id.welcome_message);
 
-        viewModel.getPokemon().observe(this, pokemon -> {
-            if (pokemon != null)
-                textView.setText(pokemon.getName());
+        viewModel.getMessage().observe(this, message -> {
+            if (message != null)
+                messageTextView.setText(message.getBody());
         });
     }
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveData(View v) {
-        viewModel.savePokemon(editText.getText().toString());
+        viewModel.saveMessage(messageEditText.getText().toString());
     }
 
     public void signOut(View v) {

@@ -11,7 +11,7 @@ public class UserRepository {
     private final Application app;
     private static UserRepository instance;
 
-    public UserRepository(Application app) {
+    private UserRepository(Application app) {
         this.app = app;
         currentUser = new UserLiveData();
     }
